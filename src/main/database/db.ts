@@ -92,4 +92,10 @@ db.exec(`
     );
     `)
 
+export function getConfiguracion() {
+    const row = db.prepare('SELECT * FROM configuracion LIMIT 1').get()
+    return row || null
+}
+
+
 export default db
