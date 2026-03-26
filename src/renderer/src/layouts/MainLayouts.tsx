@@ -3,9 +3,9 @@ import { Outlet } from "react-router-dom";
 import SideBar from "@renderer/components/SideBar";
 function MainLayout(): React.ReactElement {
     return(
-        <div className="app">
+        <div className="flex h-full">
             <SideBar />
-            <main>
+            <main className="flex-1">
                 <Outlet />
             </main>
         </div>
