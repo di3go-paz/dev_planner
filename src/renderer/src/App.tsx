@@ -1,33 +1,33 @@
-import Versions from './components/Versions'
-import electronLogo from './assets/electron.svg'
+import MainLayout from './layouts/MainLayouts'
+import { Routes, Route } from 'react-router-dom'
+import Dashboard from './pages/Dashboard'
+import Proyectos from './pages/Proyectos'
+import React from 'react'
+import NuevoProyecto from './pages/NuevoProyecto'
+import DetallecProyecto from './pages/DetalleProyecto'
+import SesionActiva from './pages/SesionActiva'
+import CheckList from './pages/CheckList'
+import ResumenSesion from './pages/ResumenSesion'
+import Configuracion from './pages/Configuracion'
+
 
 function App(): React.JSX.Element {
   const ipcHandle = (): void => window.electron.ipcRenderer.send('ping')
 
   return (
     <>
-      <img alt="logo" className="logo" src={electronLogo} />
-      <div className="creator">Powered by electron-vite</div>
-      <div className="text">
-         <span className="react">React</span>
-        &nbsp;and <span className="ts">TypeScript</span>
-      </div>
-      <p className="tip">
-        Please try pressing <code>F12</code> to open the devTool
-      </p>
-      <div className="actions">
-        <div className="action">
-          <a href="https://electron-vite.org/" target="_blank" rel="noreferrer">
-            Documentation
-          </a>
-        </div>
-        <div className="action">
-          <a target="_blank" rel="noreferrer" onClick={ipcHandle}>
-            Send IPC
-          </a>
-        </div>
-      </div>
-      <Versions></Versions>
+    <Routes>
+      <Route path='/' element={<MainLayout />}>
+        <Route index element={<Dashboard />} />
+        <Route path='proyectos' element={<Proyectos />} />
+        <Route path='nuevoproyecto' element={<NuevoProyecto />} />
+        <Route path='detalleproyecto' element={<DetallecProyecto />} />
+        <Route path='sesionactiva' element={<SesionActiva />} />
+        <Route path='checklistcierre' element={<CheckList />} />
+        <Route path='resumensesion' element={<ResumenSesion />} />
+        <Route path='configuracion' element={<Configuracion />} />
+      </Route> 
+    </Routes>
     </>
   )
 }
