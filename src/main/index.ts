@@ -2,7 +2,8 @@ import { app, shell, BrowserWindow, ipcMain } from 'electron'
 import { join } from 'path'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 import icon from '../../resources/icon.png?asset'
-import db, { getConfiguracion } from './database/db'
+import db, { getConfiguracion, guardarConfiguracion } from './database/db'
+import { config } from 'process'
 
 
 function createWindow(): void {
@@ -52,6 +53,10 @@ app.whenReady().then(() => {
 
   ipcMain.handle('get-configuracion', async () => {
     return getConfiguracion()
+  })
+
+  ipcMain.handle('guardar-configuracion', async (_, config) => {
+    return guardarConfiguracion(config)
   })
 
   createWindow()

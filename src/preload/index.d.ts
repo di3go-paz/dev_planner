@@ -5,6 +5,7 @@ declare global {
     electron: ElectronAPI
     api: {
       getConfiguracion: () => Promise<any>
+      guardarConfiguracion: (config: any) => Promise<void>
     }
   }
 }

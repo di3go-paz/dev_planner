@@ -5,7 +5,39 @@ import { join } from 'path'
 
 const userDataPath = app.getPath('userData')
 const dbPath = join(userDataPath, 'dev-planner.db')
-const db = new Database(dbPath, { verbose: console.log })
+const db = new Database(dbPath)
+
+export function guardarConfiguracion(config: any) {
+    const existe = db.prepare('SELECT id_configuracion FROM configuracion LIMIT 1').get()
+    if (existe){
+        db.prepare(`
+            UPDATE configuracion SET
+            horario_inicio = ?,
+            horario_fin = ?,
+            duracion_pomodoro = ?,
+            duracion_descanso = ? ,
+            tiempo_aviso = ?,
+            max_postergacion = ?,
+            aviso_fin_pomodoro = ?,
+            aviso_fin_descanso = ?
+            WHERE id_configuracion = ?
+            `).run(
+                config.horario_inicio, config.horario_fin,
+                config.duracion_pomodoro, config.duracion_descanso,
+                config.tiempo_aviso, config.max_postergacion,
+                config.aviso_fin_pomodoro, config.aviso_fin_descanso
+            )
+    } else {
+        db.prepare(`
+            INSERT INTO configuracion VALUES ( null, ?, ?, ?, ?, ?, ?, ?, ?)`
+        ).run(
+                config.horario_inicio, config.horario_fin,
+                config.duracion_pomodoro, config.duracion_descanso,
+                config.tiempo_aviso, config.max_postergacion,
+                config.aviso_fin_pomodoro, config.aviso_fin_descanso
+        )
+    }
+}
 
 db.exec(`
     CREATE TABLE IF NOT EXISTS proyectos (

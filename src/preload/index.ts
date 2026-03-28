@@ -1,9 +1,11 @@
 import { contextBridge, ipcRenderer } from 'electron'
 import { electronAPI } from '@electron-toolkit/preload'
+import { guardarConfiguracion } from '../main/database/db'
 
 // Custom APIs for renderer
 const api = {
-  getConfiguracion: () => ipcRenderer.invoke('get-configuracion')
+  getConfiguracion: () => ipcRenderer.invoke('get-configuracion'),
+  guardarConfiguracion: (config: any) => ipcRenderer.invoke('guardar-configuracion', config)
 }
 
 // Use `contextBridge` APIs to expose Electron APIs to
