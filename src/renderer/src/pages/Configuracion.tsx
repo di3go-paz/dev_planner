@@ -43,7 +43,8 @@ function Configuracion(): React.ReactElement {
             <div className="grid grid-cols-2 gap-4">
                 <label htmlFor="hinicio">Hora de inicio</label>
                 <input
-                className="bg-[#1a1a2e] border border-[#2a2a4a] rounded px-3 py-2 text-[#e2e8f0] disabled:opacity-50 w-full"
+                placeholder="Ej: 19:00"
+                 className="bg-[#1a1a2e] border border-[#2a2a4a] rounded px-3 py-2 text-[#e2e8f0] disabled:opacity-50 w-full"
                  id="hinicio"
                  type="text"
                  disabled={!editando}
@@ -51,6 +52,7 @@ function Configuracion(): React.ReactElement {
                  onChange={(e) => setConfiguracion({...configuracion!, horario_inicio: e.target.value})} />
                 <label htmlFor="hfin">Hora de Fin</label>
                 <input
+                placeholder="Ej: 21:00"
                 className="bg-[#1a1a2e] border border-[#2a2a4a] rounded px-3 py-2 text-[#e2e8f0] disabled:opacity-50 w-full"
                  id="hfin"
                  type="text"
@@ -63,6 +65,7 @@ function Configuracion(): React.ReactElement {
                 
                 <label htmlFor="duracion_trabajo">Tiempo de Trabajo</label>
                 <input
+                placeholder="Recomendado 25 min."
                 className="bg-[#1a1a2e] border border-[#2a2a4a] rounded px-3 py-2 text-[#e2e8f0] disabled:opacity-50 w-full" 
                 id="duracion_trabajo" 
                 type="text" 
@@ -72,6 +75,7 @@ function Configuracion(): React.ReactElement {
                 />
                 <label htmlFor="duracion_descanso">Tiempo de Descanso</label>
                 <input
+                placeholder="Recomendado 5 min."
                 className="bg-[#1a1a2e] border border-[#2a2a4a] rounded px-3 py-2 text-[#e2e8f0] disabled:opacity-50 w-full"
                 id="duracion_descanso" 
                 type="text" 
@@ -79,8 +83,9 @@ function Configuracion(): React.ReactElement {
                 value={configuracion?.duracion_descanso || ''}
                 onChange={(e) => setConfiguracion({...configuracion!, duracion_descanso: parseInt(e.target.value) || 0})}
                 />
-                <label htmlFor="aviso_descanso">Aviso din de descanso</label>
+                <label htmlFor="aviso_descanso">Aviso fin de descanso</label>
                 <input
+                placeholder="Recomendado 1 min."
                 className="bg-[#1a1a2e] border border-[#2a2a4a] rounded px-3 py-2 text-[#e2e8f0] disabled:opacity-50 w-full" 
                 id="aviso_descanso" 
                 type="text"
@@ -88,8 +93,9 @@ function Configuracion(): React.ReactElement {
                 value={configuracion?.aviso_fin_descanso || ''}
                 onChange={(e) => setConfiguracion({...configuracion!, aviso_fin_descanso: parseInt(e.target.value) || 0})}
                 />
-                <label htmlFor="aviso_pomodoro">Aviso din de tiempo de trabajo</label>
+                <label htmlFor="aviso_pomodoro">Aviso fin de tiempo de trabajo</label>
                 <input
+                placeholder="Recomendado 2 min."
                 className="bg-[#1a1a2e] border border-[#2a2a4a] rounded px-3 py-2 text-[#e2e8f0] disabled:opacity-50 w-full"
                 id="aviso_pomodoro"
                 type="text"
@@ -101,8 +107,9 @@ function Configuracion(): React.ReactElement {
             <p className="text-sm text-[#94a3b8] mb-3 mt-6">ARRANQUE FORZADO</p>
             <div className="grid grid-cols-2 gap-4">
                 
-                <label htmlFor="descando">Duracion del descanso</label>
+                <label htmlFor="descando">Tiempo de aviso</label>
                 <input
+                placeholder="Recomendado 15 min."
                 className="bg-[#1a1a2e] border border-[#2a2a4a] rounded px-3 py-2 text-[#e2e8f0] disabled:opacity-50 w-full"
                 id="descanso"
                 type="text"
@@ -112,6 +119,7 @@ function Configuracion(): React.ReactElement {
                 />
                 <label htmlFor="postergaciones">N° de postergaciones</label>
                 <input
+                placeholder="Recomendado 2 veces"
                 className="bg-[#1a1a2e] border border-[#2a2a4a] rounded px-3 py-2 text-[#e2e8f0] disabled:opacity-50 w-full"
                 id="postergaciones"
                 type="text"

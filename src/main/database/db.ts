@@ -25,7 +25,8 @@ export function guardarConfiguracion(config: any) {
                 config.horario_inicio, config.horario_fin,
                 config.duracion_pomodoro, config.duracion_descanso,
                 config.tiempo_aviso, config.max_postergacion,
-                config.aviso_fin_pomodoro, config.aviso_fin_descanso
+                config.aviso_fin_pomodoro, config.aviso_fin_descanso,
+                existe.id_configuracion
             )
     } else {
         db.prepare(`
@@ -34,7 +35,8 @@ export function guardarConfiguracion(config: any) {
                 config.horario_inicio, config.horario_fin,
                 config.duracion_pomodoro, config.duracion_descanso,
                 config.tiempo_aviso, config.max_postergacion,
-                config.aviso_fin_pomodoro, config.aviso_fin_descanso
+                config.aviso_fin_pomodoro, config.aviso_fin_descanso,
+                
         )
     }
 }
