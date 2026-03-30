@@ -2,8 +2,7 @@ import { app, shell, BrowserWindow, ipcMain } from 'electron'
 import { join } from 'path'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 import icon from '../../resources/icon.png?asset'
-import db, { getConfiguracion, guardarConfiguracion } from './database/db'
-import { config } from 'process'
+import db, { getConfiguracion, getProyectos, guardarConfiguracion, getProyecto, crearProyecto, crearTarea, getTarea, getTareas } from './database/db'
 
 
 function createWindow(): void {
@@ -58,7 +57,30 @@ app.whenReady().then(() => {
   ipcMain.handle('guardar-configuracion', async (_, config) => {
     return guardarConfiguracion(config)
   })
+  
+  ipcMain.handle('get-proyectos', async () => {
+    return getProyectos()
+  })
 
+  ipcMain.handle('get-proyecto', async (_, id_proyecto) => {
+    return getProyecto(id_proyecto)
+  })
+
+  ipcMain.handle('crear-tarea', async (_, tarea) => {
+    return crearTarea(tarea)
+  })
+  
+  ipcMain.handle('get-tarea', async (_, id_tarea) => {
+    return getTarea(id_tarea)
+  })
+
+  ipcMain.handle('get-tareas', async () => {
+    return getTareas()
+  })
+
+  ipcMain.handle('crear-proyecto', async (_, project) => {
+    return crearProyecto(project)
+  })
   createWindow()
 
   app.on('activate', function () {

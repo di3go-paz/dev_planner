@@ -35,8 +35,7 @@ export function guardarConfiguracion(config: any) {
                 config.horario_inicio, config.horario_fin,
                 config.duracion_pomodoro, config.duracion_descanso,
                 config.tiempo_aviso, config.max_postergacion,
-                config.aviso_fin_pomodoro, config.aviso_fin_descanso,
-                
+                config.aviso_fin_pomodoro, config.aviso_fin_descanso
         )
     }
 }
@@ -61,7 +60,6 @@ db.exec(`
     estado TEXT CHECK(estado IN ('por_iniciar', 'en_progreso', 'terminado')),
     proyecto_id INTEGER NOT NULL,
     FOREIGN KEY (proyecto_id) REFERENCES proyectos(id_proyecto)
-
 
     );
 
@@ -131,5 +129,42 @@ export function getConfiguracion() {
     return row || null
 }
 
+export function getProyectos() {
+    const proyectos = db.prepare('SELECT * FROM proyectos').all()
+    return proyectos
+}
+
+export function getProyecto(id_proyecto: number) {
+    const proyecto = db.prepare('SELECT * FROM proyectos WHERE id_proyecto= ? ' ).get(id_proyecto)
+    return proyecto
+}
+
+export function crearProyecto(project: any) {
+    const crearproyecto = db.prepare(`INSERT INTO proyectos VALUES (null , ?, ?, ?, ?, ?, ?, ?)`).run(
+        project.nombre_proyecto, project.descripcion_proyecto,
+        project.fecha_inicio_proyecto, project.fecha_limite_proyecto,
+        project.horas_estimadas_proyectos, project.color_proyecto,
+        project.creado_en
+        )
+    return (crearproyecto)
+}
+
+export function getTarea(id_tarea) {
+    const tarea = db.prepare(`SELECT * FROM tareas WHERE id_tarea=?`).get(id_tarea)
+    return tarea
+}
+
+export function getTareas() {
+    const tareas = db.prepare(`SELECT * FROM tareas`).all()
+    return tareas
+}
+
+export function crearTarea(tarea: any) {
+    const task = db.prepare(`INSERT INTO tareas VALUES (null, ?, ?, ?, ?, ?)`). run(
+        tarea.descripcion_tarea, tarea.tiempo_estimado_tarea, tarea.tiempo_real_tarea,
+        tarea.estado, tarea.proyecto_id
+    )
+    return (task)
+}
 
 export default db
